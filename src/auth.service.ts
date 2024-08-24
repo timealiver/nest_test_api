@@ -5,8 +5,8 @@ export class AuthService {
   getHello(): string {
     return 'Hello World!';
   }
-  registration(req,res): string {
-    // const errors = validationResult(req); //здесь должна быть валидация полей
+  registration(createUserDto): string {
+    
     return "";
   }
 }
