@@ -14,6 +14,6 @@ export class Board extends BaseEntity {
   @Column("timestamp")
   created_at: Date;
 
-  @Column("simple-array")
+  @Column("simple-array",{ default: []})
   idCards: string[];
 }

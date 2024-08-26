@@ -11,7 +11,7 @@ export class AuthMiddleware implements NestMiddleware {
     const authorizationHeader = req.get('Authorization');
     const token = authorizationHeader.replace('Bearer ', '');
     const isLegit = verify(token, this.configService.get('SECRET')) as JSON;
-
+    console.log(isLegit);
     if ('id' in isLegit) {
         req.body = { userId: isLegit.id, ...req.body };
         next();

@@ -30,8 +30,9 @@ export class BoardService{
         };
         //Проверить доступ к созданию доски?? (Проверить header Authorization) (Auth Middleware)
     }
-    async readBoard(){
-
+    async readBoard(readBoardDto){
+        const board = await Board.findOne({where:{id:readBoardDto.boardId}});
+        return JSON.stringify(board);
     }
     async updateBoard(){
 
@@ -39,4 +40,14 @@ export class BoardService{
     async deleteBoard(){
 
     }
+    async isBoardOwner(userId: string, boardId: string): Promise<boolean> {
+        try {
+            const board = await Board.findOne({ where: { id: boardId, creator_id: userId } });
+            console.log(board);
+            return !!board;       
+        } catch {
+            return false;
+        }
+      }
+    
 }

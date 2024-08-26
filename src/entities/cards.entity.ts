@@ -17,7 +17,7 @@ export class Card extends BaseEntity {
   @Column("timestamp")
   created_at: Date;
 
-  @Column("simple-array")
+  @Column("simple-array",{ default: []})
   idComments: string[];
 
 }

@@ -2,7 +2,7 @@ import { Body, Controller, Get, HttpCode, HttpStatus, Post, Res, UseGuards, UseP
 import { AuthUserDto, CreateUserDto } from '../entities/DTOs/user.dto';
 import { BoardService } from 'src/services/board.service';
 import { BoardOwnerGuard } from 'src/guards/board-owner.guard';
-import { CreateBoardDto } from 'src/entities/DTOs/board.dto';
+import { BoardDto } from 'src/entities/DTOs/board.dto';
 
 @Controller()
 export class BoardController {
@@ -10,9 +10,16 @@ export class BoardController {
   @Post('/createBoard')
   @HttpCode(HttpStatus.CREATED)
   //@UseGuards(BoardOwnerGuard)
-  async createBoard(@Body() createBoardDto: CreateBoardDto){
+  async createBoard(@Body() createBoardDto: BoardDto){
         return this.boardService.createBoard(createBoardDto);
       //Проверить доступ к созданию доски?? (Проверить header Authorization) (Auth Middleware)
   }
 
+  @Get('/readBoard')
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(BoardOwnerGuard)
+  async readBoard(@Body() readBoardDto: BoardDto){
+        return this.boardService.readBoard(readBoardDto);
+
+    }
 }
