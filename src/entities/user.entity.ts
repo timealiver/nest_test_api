@@ -13,6 +13,6 @@ export class User extends BaseEntity {
   @Column("text") 
   password: string;
 
-  @Column("simple-array", { default: [] })
+  @Column("simple-array")
   idBoards: string[];
 }

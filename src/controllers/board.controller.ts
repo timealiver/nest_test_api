@@ -7,7 +7,7 @@ import { CreateBoardDto } from 'src/entities/DTOs/board.dto';
 @Controller()
 export class BoardController {
   constructor(private readonly boardService: BoardService) {}
-  @Post()
+  @Post('/createBoard')
   @HttpCode(HttpStatus.CREATED)
   //@UseGuards(BoardOwnerGuard)
   async createBoard(@Body() createBoardDto: CreateBoardDto){
