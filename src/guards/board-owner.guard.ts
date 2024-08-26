@@ -14,7 +14,7 @@ canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<
     console.log(userId, boardId);
     if (userId && boardId){
         return this.boardService.isBoardOwner(userId,boardId)
-    }else{
+    } else{
         throw new HttpException('You are not the owner of this board', HttpStatus.FORBIDDEN);
     }
 

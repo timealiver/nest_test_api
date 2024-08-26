@@ -34,7 +34,9 @@ export class AppModule {
       .apply(AuthMiddleware)
       .forRoutes(
         { path: '/createBoard', method: RequestMethod.POST },
-        { path: '/readBoard', method: RequestMethod.GET }
+        { path: '/readBoard', method: RequestMethod.GET },
+        { path: '/updateBoard', method: RequestMethod.PATCH },
+        { path: '/deleteBoard', method: RequestMethod.DELETE }
       );
   }
 }

@@ -1,5 +1,4 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Post, Res, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
-import { AuthUserDto, CreateUserDto } from '../entities/DTOs/user.dto';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Patch, Post,UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { BoardService } from 'src/services/board.service';
 import { BoardOwnerGuard } from 'src/guards/board-owner.guard';
 import { BoardDto } from 'src/entities/DTOs/board.dto';
@@ -8,9 +7,10 @@ import { BoardDto } from 'src/entities/DTOs/board.dto';
 export class BoardController {
   constructor(private readonly boardService: BoardService) {}
   @Post('/createBoard')
+  @UsePipes(ValidationPipe)
   @HttpCode(HttpStatus.CREATED)
   //@UseGuards(BoardOwnerGuard)
-  async createBoard(@Body() createBoardDto: BoardDto){
+  async createBoard(@Body() createBoardDto: BoardDto):Promise<{message: string}>{
         return this.boardService.createBoard(createBoardDto);
       //Проверить доступ к созданию доски?? (Проверить header Authorization) (Auth Middleware)
   }
@@ -20,6 +20,19 @@ export class BoardController {
   @UseGuards(BoardOwnerGuard)
   async readBoard(@Body() readBoardDto: BoardDto){
         return this.boardService.readBoard(readBoardDto);
+    }
 
+  @Patch('/updateBoard')
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(BoardOwnerGuard)
+  async updateBoard(@Body() updateBoardDto: BoardDto):Promise<{message: string}>{
+        return this.boardService.updateBoard(updateBoardDto);
+    }
+  
+  @Delete('/deleteBoard')
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(BoardOwnerGuard)
+  async deleteBoard(@Body() deleteBoardDto: BoardDto):Promise<{message: string}>{
+        return this.boardService.deleteBoard(deleteBoardDto);
     }
 }

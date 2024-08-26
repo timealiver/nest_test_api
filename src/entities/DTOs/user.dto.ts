@@ -17,5 +17,6 @@ export class AuthUserDto {
   @IsNotEmpty({message: 'Password shouldn\'t be empty'})
   readonly password: string;
 
+
   
 }
