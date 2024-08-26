@@ -3,18 +3,17 @@ import { Entity,BaseEntity, Column, PrimaryGeneratedColumn } from "typeorm";
 @Entity("boards")
 export class Board extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
-  id: String;
+  id: string;
 
   @Column("uuid")
-  creator_id: String;
+  creator_id: string;
 
   @Column("varchar")
-  name: String;
+  name: string;
 
   @Column("timestamp")
   created_at: Date;
 
   @Column("simple-array", { default: [] })
-  idCards: String[];
-
+  idCards: string[];
 }

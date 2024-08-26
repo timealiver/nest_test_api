@@ -1,9 +1,12 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AuthService } from './auth.service';
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
+import { AuthController } from './controllers/auth.controller';
+import { AuthService } from './services/auth.service';
 import {ConfigModule, ConfigService} from '@nestjs/config'
 import {TypeOrmModule} from '@nestjs/typeorm'
 import { join } from 'path';
+import { AuthMiddleware } from './middlewares/auth.middleware';
+import { BoardService } from './services/board.service';
+import { BoardController } from './controllers/board.controller';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -22,7 +25,15 @@ import { join } from 'path';
       })
     })
   ],
-  controllers: [AppController],
-  providers: [AuthService],
+  controllers: [AuthController,BoardController],
+  providers: [AuthService,BoardService],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(AuthMiddleware)
+      .exclude({ path: 'login', method: RequestMethod.POST })
+      .exclude({ path: 'reg', method: RequestMethod.POST })
+      .forRoutes({ path: '*', method: RequestMethod.ALL });
+  }
+}

@@ -2,17 +2,17 @@ import {Entity, Column, BaseEntity, PrimaryGeneratedColumn} from "typeorm";
 
 @Entity("users")
 export class User extends BaseEntity {
-  @PrimaryGeneratedColumn("uuid") id: String;
+  @PrimaryGeneratedColumn("uuid") id: string;
 
   @Column("boolean", { default: false })
   confirmed: Boolean;
 
   @Column("varchar", { length: 255 })
-  email: String;
+  email: string;
 
   @Column("text") 
-  password: String;
+  password: string;
 
   @Column("simple-array", { default: [] })
-  idBoards: String[];
+  idBoards: string[];
 }

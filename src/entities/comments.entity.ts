@@ -3,13 +3,13 @@ import { Entity,BaseEntity, Column, PrimaryGeneratedColumn } from "typeorm";
 @Entity("comments")
 export class Comment extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
-  id: String;
+  id: string;
 
   @Column("uuid")
-  creator_id: String;
+  creator_id: string;
 
   @Column("text")
-  body: String;
+  body: string;
 
   @Column("timestamp")
   created_at: Date;
