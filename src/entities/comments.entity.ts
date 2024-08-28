@@ -1,17 +1,19 @@
-import { Entity,BaseEntity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, BaseEntity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity("comments")
+@Entity('comments')
 export class Comment extends BaseEntity {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column("uuid")
+  @Column('uuid')
   creator_id: string;
 
-  @Column("text")
+  @Column('uuid')
+  card_id: string;
+
+  @Column('text')
   body: string;
 
-  @Column("timestamp")
+  @Column('timestamp')
   created_at: Date;
-
 }

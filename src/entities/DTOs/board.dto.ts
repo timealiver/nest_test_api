@@ -1,17 +1,14 @@
-import {IsNotEmpty} from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
 
 export class BoardDto {
-  readonly userId : string;
+  readonly userId: string;
 
-  readonly boardId : string;
+  readonly boardId: string;
 
-  @IsNotEmpty({message: 'Name of board shouldn\'t be empty'})
+  @IsNotEmpty({ message: "Name of board shouldn't be empty" })
   readonly name: string;
 
   readonly created_at: Date;
 
   readonly idCards: string[];
 }
-
-
-

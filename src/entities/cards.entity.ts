@@ -1,23 +1,25 @@
-import { Entity,BaseEntity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, BaseEntity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity("cards")
+@Entity('cards')
 export class Card extends BaseEntity {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column("uuid")
+  @Column('uuid')
   creator_id: string;
 
-  @Column("varchar")
+  @Column('uuid')
+  board_id: string;
+
+  @Column('varchar')
   title: string;
 
-  @Column("text")
+  @Column('text')
   body: string;
 
-  @Column("timestamp")
+  @Column('timestamp')
   created_at: Date;
 
-  @Column("simple-array",{ default: []})
+  @Column('simple-array', { default: [] })
   idComments: string[];
-
 }
