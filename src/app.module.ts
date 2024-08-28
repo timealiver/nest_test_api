@@ -7,6 +7,10 @@ import { join } from 'path';
 import { AuthMiddleware } from './middlewares/auth.middleware';
 import { BoardService } from './services/board.service';
 import { BoardController } from './controllers/board.controller';
+import { CardController } from './controllers/card.controller';
+import { CardService } from './services/card.service';
+import { CommentService } from './services/comment.service';
+import { CommentController } from './controllers/comment.controller';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -25,8 +29,8 @@ import { BoardController } from './controllers/board.controller';
       }),
     }),
   ],
-  controllers: [AuthController, BoardController],
-  providers: [AuthService, BoardService],
+  controllers: [AuthController, BoardController,CardController, CommentController],
+  providers: [AuthService, BoardService, CardService,CommentService],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
@@ -37,6 +41,14 @@ export class AppModule {
         { path: '/readBoard', method: RequestMethod.GET },
         { path: '/updateBoard', method: RequestMethod.PATCH },
         { path: '/deleteBoard', method: RequestMethod.DELETE },
+        { path: '/createCard', method: RequestMethod.POST },
+        { path: '/readCard', method: RequestMethod.GET },
+        { path: '/updateCard', method: RequestMethod.PATCH },
+        { path: '/deleteCard', method: RequestMethod.DELETE },
+        { path: '/createComment', method: RequestMethod.POST },
+        { path: '/readComment', method: RequestMethod.GET },
+        { path: '/updateComment', method: RequestMethod.PATCH },
+        { path: '/deleteComment', method: RequestMethod.DELETE },
       );
   }
 }

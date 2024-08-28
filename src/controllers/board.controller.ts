@@ -24,7 +24,7 @@ export class BoardController {
   //@UseGuards(BoardOwnerGuard)
   async createBoard(
     @Body() createBoardDto: BoardDto,
-  ): Promise<{ message: string }> {
+  ): Promise<{ message: string, id:string }> {
     return this.boardService.createBoard(createBoardDto);
     //Проверить доступ к созданию доски?? (Проверить header Authorization) (Auth Middleware)
   }

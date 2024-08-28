@@ -25,17 +25,18 @@ export class UnitOwnerGuard implements CanActivate {
       const request = context.switchToHttp().getRequest<Request>();
       const { userId, boardId, cardId, commentId } = request.body;
       console.log(userId, boardId);
-      if (userId && boardId && cardId && commentId) {
-        return (
-          this.commentService.isCommentOwner(userId, commentId) &&
-          this.commentService.isCardOwner(userId, cardId) &&
-          this.boardService.isBoardOwner(userId, boardId)
-        );
-      } else if (userId && boardId && cardId) {
-        return this.commentService.isCardOwner(userId, cardId);
-      } else if (userId && boardId) {
+
+      if (userId && boardId) { //CRUD для Board
+        console.log("3",userId,boardId);
         return this.boardService.isBoardOwner(userId, boardId);
+      } else if(userId && cardId){ //CRUD для Card
+        console.log("2",userId,cardId);
+        return this.cardService.isCardOwner(userId, cardId)
+      } else if(userId && commentId){  //CRUD для Comment
+        console.log("1",userId,commentId);
+        return this.commentService.isCommentOwner(userId, commentId)
       }
+      console.log("4",userId,commentId,boardId,cardId);
     } catch (error) {
       if (!(error instanceof HttpException)) {
         throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);

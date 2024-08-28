@@ -3,7 +3,7 @@ import { IsEmail, IsNotEmpty, Matches, MinLength } from 'class-validator';
 export class CreateUserDto {
   @IsEmail()
   readonly email: string;
-
+  
   @IsNotEmpty({ message: "Password shouldn't be empty" })
   @MinLength(8, { message: 'Password must contain at least 8 symbols' })
   @Matches(/[A-Z]/, {

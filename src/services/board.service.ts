@@ -4,7 +4,7 @@ import { User } from 'src/entities/user.entity';
 
 @Injectable()
 export class BoardService {
-  async createBoard(createBoardDto): Promise<{ message: string }> {
+  async createBoard(createBoardDto): Promise<{ message: string, id:string }> {
     try {
       const { userId, name } = createBoardDto;
       if (!name) {
@@ -23,7 +23,7 @@ export class BoardService {
       user.idBoards.push(board.id);
       await user.save();
       console.log(user);
-      return { message: 'Task created succesfully' };
+      return { message: 'Board created succesfully', id: board.id };
     } catch (error) {
       if (!(error instanceof HttpException)) {
         throw new HttpException(error, HttpStatus.BAD_REQUEST);

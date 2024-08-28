@@ -18,7 +18,7 @@ export class AuthService {
       console.log('1');
       if (candidate) {
         throw new HttpException(
-          'Пользователь с таким email уже существует',
+          'User with this email alreaady registered',
           HttpStatus.BAD_REQUEST,
         );
       }
